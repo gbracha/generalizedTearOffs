@@ -40,7 +40,7 @@ The translations above are only approximations, because closurization has specia
 
 In all of the above cases, `T` may be taken to represent a parameterized type or an identifier. 
 
-##Motivation {-}
+##Motivation 
 
 Dart users working with projects as varied as Angular.Dart, Dart serialization and the core libs have brought up these issues: see bugs 
 https://code.google.com/p/dart/issues/detail?id=5879
@@ -49,7 +49,7 @@ https://code.google.com/p/dart/issues/detail?id=13389
 
 for examples.
 
-###Pros {-}
+###Pros 
 
 Eliminates the limitations of the existing tear-off syntax: one can tear off constructors, operators, getters and setters. Such limitations are a language design smell that should be eliminated.
 
@@ -57,7 +57,7 @@ Possibly improves tear-off performance slightly. In principle, a given construct
 
 
 
-###Cons {-}
+###Cons 
 
 Any additional feature comes at a cost. More syntax to learn (and this syntax is not familiar), more features to be implemented (and the opportunity cost of not focusing on something else), added size and complexity in the implementation.  That much can be said of any language feature. 
 
@@ -65,7 +65,7 @@ Certain things can be done in more than one way, which is in general an anti-pat
 
 Both of the above imply one more issue to debate in style guides and/or code reviews. Should one use the old syntax where it applies (making code more familiar) or the new one (more efficient and less ambiguous)? Which is more readable? The old one that is familiar, or the new one that is unambiguous? The new syntax is perhaps more robust in the face of code changes (you can change a getter to a method or vice versa and the meaning won’t change). 
 
-##Examples  {-} 
+##Examples   
 
 
 `new List#`
@@ -89,12 +89,12 @@ The proposal does not allow for the use of a tear-off as a constant closure.
 
 
 
-#Specification Changes {-}
+#Specification Changes 
 
 As is the usual case for such proposals, changes to the specification are highlighted in yellow. 
 
 		 	 	 		
-###  9.3 Type of a Function {-}
+###  9.3 Type of a Function 
 					
 If a function does not declare a return type explicitly, its return type is dynamic (19.6), unless it is a constructor function, in which case its return type is the immediately enclosing class. 
 	Rest  of 9.3 is unchanged; the above addition is true in any case and it is good to have it stated explicitly; it didn’t really matter until now, but the definitions below make use of the type of a constructor function. 			
@@ -103,7 +103,7 @@ If a function does not declare a return type explicitly, its return type is dyna
 		
 				
 					
-## 16 Expressions	 {-}
+## 16 Expressions	 
 			
 ```
 expression:
@@ -145,7 +145,7 @@ Sadly, it may have an effect on the surrounding expression. Given a class *C* wi
 
 				
 					
-### 16.18 Property Extraction {-}
+### 16.18 Property Extraction 
 					
 Property extraction allows for a member or constructor to be accessed as a property rather than a function. A property extraction can be either:
 
@@ -154,7 +154,7 @@ Property extraction allows for a member or constructor to be accessed as a prope
 
 Property extraction takes several syntactic forms: _e.m_ (16.18.1), __super__*.m* (16.18.2),  _e#m_ (16.18.3), **new** *T#m* (16.18.4),  **new** *T#* (16.18.5)     and **super** *#m* (16.18.6), where *e* is an expression, *m* is an identifier optionally followed by an equal sign and *T* is a type.
 
-#### 16.18.1 Getter Access and Method Extraction {-}
+#### 16.18.1 Getter Access and Method Extraction 
 
 Evaluation of a property extraction *i* of the form *e.m* proceeds as follows:
 					
@@ -214,7 +214,7 @@ The static type of *i* is:
 
 
 
-#### 16.18.2 Super Getter Access and Method Closurization {-}
+#### 16.18.2 Super Getter Access and Method Closurization 
 	
 Evaluation of a property extraction *i* of the form *super.m* proceeds as follows:
 
@@ -256,7 +256,7 @@ The static type of *i* is:
 * The type **dynamic** otherwise.
 
 
-####16.18.3 General Closurization {-}
+####16.18.3 General Closurization 
 
 Evaluation of a property extraction *i* of the form e#m proceeds as follows:
 
@@ -307,7 +307,7 @@ The static type of *i* is:
 
 * The type **dynamic** otherwise.
 
-### 16.18.4 Named Constructor Extraction  {-}
+### 16.18.4 Named Constructor Extraction  
 
 Evaluation of a property extraction *i* of the form **new** *T#m* or **const** *T#m* proceeds as as follows:
 
@@ -318,7 +318,7 @@ If *T* is a malformed type (19.1), a dynamic error occurs. If *T* is a deferred 
 
 The static type of *i* is the type of the constructor function, if *T* denotes a class in the surrounding scope with an accessible (6.2) constructor *f* named *m*. Otherwise the static type of *i* is **dynamic**.
 
-### 16.18.5 Anonymous Constructor Extraction {-}
+### 16.18.5 Anonymous Constructor Extraction 
 
  Evaluation of a property extraction *i* of the form **new** *T#*  or **const** *T#* proceeds as follows:
 
@@ -329,7 +329,7 @@ If *T* is a malformed type (19.1), a dynamic error occurs. If *T* is a deferred 
 The static type of *i* is the type of the constructor function *T()*, if *T* denotes a class in the surrounding scope with an anonymous constructor *T()*.  Otherwise the static type of *i* is **dynamic**.
 
 
-### 16.18.6 General Super Property Extraction {-}
+### 16.18.6 General Super Property Extraction 
 
 Evaluation of a property extraction *i* of the form super#m proceeds as follows:
 
@@ -366,7 +366,7 @@ It is a static type warning if *S* does not have an accessible instance member n
 The static type of *i* is the static type of function *S.m*, if *S* has an accessible instance member named *m*. Otherwise the static type of *i* is **dynamic**.
 
 
-### 16.18.7 Ordinary Member Closurization {-}
+### 16.18.7 Ordinary Member Closurization 
 
 
 Let *o* be an object, and let *u* be a fresh final variable bound to *o*:
@@ -400,7 +400,7 @@ The closurization of setter *m* on object *o* is defined to be equivalent to `(a
 One can tell whether one implemented a property via a method or via a field/getter, which means that one has to plan ahead as to what construct to use, and that choice is reflected in the interface of the class.*
 
 	
-### 16.18.8 Named Constructor Closurization {-}
+### 16.18.8 Named Constructor Closurization 
 
 The *closurization of constructor f of type T* is defined to be equivalent to:
 
@@ -414,7 +414,7 @@ Except that iff `identical(`*T1*`, `*T2*`)` then **new** *T1#m ==* **new** *T2#m
 *The above implies that for non-parameterized types, one can rely on the equality of closures resulting from closurization on the “same” type. For parameterized types, one cannot, since there is no requirement to canonicalize them.*
 
 
-### 16.18.9 Anonymous Constructor Closurization {-}
+### 16.18.9 Anonymous Constructor Closurization 
 
 The *closurization of anonymous constructor m on type T* is defined to be equivalent to:				
 
@@ -427,7 +427,7 @@ Except that iff `identical(`*T1*`, `*T2*`)` then **new** *T1# ==* **new** *T2#*.
 
 
 	
-### 16.18.10 Super Closurization	 {-}			 					
+### 16.18.10 Super Closurization	 			 					
 
 The *closurization of method f with respect to superclass S* is defined to be equivalent to:
 
@@ -452,7 +452,7 @@ The closurization of setter *f* with respect to superclass *S* is defined to be 
 
 
 
-### 16.30 Postfix Expressions {-}
+### 16.30 Postfix Expressions 
 
 Postfix expressions invoke the postfix operators on objects.
 ```
