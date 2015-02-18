@@ -1,12 +1,10 @@
-Title         : Generalized Tear-offs
-Heading Base  : 2
-Author        : Gilad Bracha
+#Generalized Tear-offs
 
-[TITLE]
+##Gilad Bracha
 
 
 
-#Overview {-}
+#Overview 
 
 The Dart language supports closurization of methods (aka tear-offs). Closurization is currently specified in section 16.18.1 of the Dart standard. However, closurization cannot be applied to constructors, operators, getters or setters. The reason is that closurization is represented syntactically via an overloading of the dot operator.
 
