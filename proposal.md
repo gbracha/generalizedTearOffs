@@ -2,8 +2,6 @@
 
 ## Contact information
 
-Three key pieces of information are required:
-
 1. **Gilad Bracha.** 
 
 2. **gbracha@google.com.** 
