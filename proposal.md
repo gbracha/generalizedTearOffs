@@ -1,10 +1,18 @@
 #Generalized Tear-offs
 
-##Gilad Bracha
+## Contact information
+
+Three key pieces of information are required:
+
+1. **Gilad Bracha.** 
+
+2. **gbracha@google.com.** 
+
+3. **https://github.com/gbracha/generalizedTearOffs** 
 
 
 
-#Overview 
+##Summary 
 
 The Dart language supports closurization of methods (aka tear-offs). Closurization is currently specified in section 16.18.1 of the Dart standard. However, closurization cannot be applied to constructors, operators, getters or setters. The reason is that closurization is represented syntactically via an overloading of the dot operator.
 
@@ -88,10 +96,17 @@ which is a closure that when invoked, calls a closure that allocates a new list 
 The proposal does not allow for the use of a tear-off as a constant closure. 
 
 
+## Proposal
 
-#Specification Changes 
+See above.
 
-As is the usual case for such proposals, changes to the specification are highlighted in yellow. 
+
+## Deliverables
+
+
+### Language specification changes
+
+Commentary on the specification is given in *italics*. Rationale is in **bold**.
 
 		 	 	 		
 ###  9.3 Type of a Function 
@@ -495,3 +510,23 @@ A postfix expression of the form *v--*, where *v* is an identifier, is equivalen
 A postfix expression of the form *C.v--* is equivalent to `(){var r = C.v; C.v = r - 1; return r}()`.
 
 A postfix expression of the form *e1.v--* is equivalent to `(x){var r = x.v; x.v = r - 1; return r}(e1)`.
+
+
+
+### A working implementation
+
+TBD
+
+### Tests
+
+TBD
+
+## Patents rights
+
+TC52, the Ecma technical committee working on evolving the open [Dart standard][], operates under a royalty-free patent policy, [RFPP][] (PDF). This means if the proposal graduates to being sent to TC52, you will have to sign the Ecma TC52 [external contributer form]() and submit it to Ecma.
+
+[tex]: http://www.latex-project.org/
+[language spec]: https://www.dartlang.org/docs/spec/
+[dart standard]: http://www.ecma-international.org/publications/standards/Ecma-408.htm
+[rfpp]: http://www.ecma-international.org/memento/TC52%20policy/Ecma%20Experimental%20TC52%20Royalty-Free%20Patent%20Policy.pdf
+[form]: http://www.ecma-international.org/memento/TC52%20policy/Contribution%20form%20to%20TC52%20Royalty%20Free%20Task%20Group%20as%20a%20non-member.pdf
